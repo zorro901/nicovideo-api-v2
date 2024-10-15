@@ -1,4 +1,4 @@
-import { createClient } from './dist/index.cjs';
+import { createClient } from './dist/index.js';
 
 const nicovideo = createClient();
 

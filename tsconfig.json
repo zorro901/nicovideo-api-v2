@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Bundler",
+    "baseUrl": ".",
+    "rootDir": "./src"
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "dist"
+  ]
+}
