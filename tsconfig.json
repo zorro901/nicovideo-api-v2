@@ -1,26 +1,17 @@
 {
-  "compilerOptions": {
-    "lib": [
-      "esnext",
-      "dom"
-    ],
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "target": "ESNext",
-    "module": "preserve",
-    "moduleResolution": "Bundler",
-    "baseUrl": ".",
-    "rootDir": "./src",
-    "typeRoots": ["src/types","node_modules/@types"]
-  },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "dist",
-    "src/test",
-    ".tsup"
-  ]
+	"compilerOptions": {
+		"lib": ["esnext", "dom"],
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"target": "ESNext",
+		"module": "preserve",
+		"moduleResolution": "Bundler",
+		"baseUrl": ".",
+		"rootDir": "./src",
+		"typeRoots": ["src/types", "node_modules/@types"]
+	},
+	"include": ["src"],
+	"exclude": ["dist", "src/test", ".tsup"]
 }

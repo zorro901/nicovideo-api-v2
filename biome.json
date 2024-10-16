@@ -1,0 +1,99 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.9.3/schema.json",
+	"vcs": {
+		"enabled": false,
+		"clientKind": "git",
+		"useIgnoreFile": false
+	},
+	"files": {
+		"ignoreUnknown": true,
+		"ignore": ["dist"]
+	},
+	"organizeImports": {
+		"enabled": true
+	},
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"security": {
+				"recommended": true
+			},
+			"a11y": {
+				"recommended": true
+			},
+			"complexity": {
+				"recommended": true,
+				"useSimplifiedLogicExpression": "error",
+				"noVoid": "error",
+				"noExcessiveCognitiveComplexity": {
+					"level": "error",
+					"options": {
+						"maxAllowedComplexity": 30
+					}
+				}
+			},
+			"correctness": {
+				"recommended": true,
+				"noUndeclaredVariables": "off",
+				"useHookAtTopLevel": "error",
+				"noNewSymbol": "error",
+				"noUnusedImports": "error"
+			},
+			"style": {
+				"recommended": true,
+				"noNegationElse": "error",
+				"noRestrictedGlobals": {
+					"level": "error",
+					"options": {
+						"deniedGlobals": ["$"]
+					}
+				},
+				"useFragmentSyntax": "error",
+				"useNamingConvention": "off",
+				"useShorthandArrayType": "error",
+				"useShorthandAssign": "error",
+				"noNamespace": "error",
+				"noParameterProperties": "error",
+				"noShoutyConstants": "error",
+				"useBlockStatements": "error",
+				"useCollapsedElseIf": "error",
+				"useSingleCaseStatement": "error",
+				"noNamespaceImport": "off"
+			},
+			"suspicious": {
+				"recommended": true,
+				"noConsoleLog": "error",
+				"noApproximativeNumericConstant": "error",
+				"noMisrefactoredShorthandAssign": "error",
+				"noConsole": "off"
+			},
+			"performance": {
+				"recommended": true
+			},
+			"nursery": {
+				"all": true,
+				"useImportRestrictions": "off",
+				"noSecrets": "off",
+				"noCommonJs": "off",
+				"noProcessEnv": "off"
+			}
+		}
+	},
+	"javascript": {
+		"parser": {
+			"unsafeParameterDecoratorsEnabled": true
+		},
+		"formatter": {
+			"jsxQuoteStyle": "single",
+			"quoteStyle": "single",
+			"semicolons": "asNeeded",
+			"trailingCommas": "all",
+			"bracketSameLine": true
+		}
+	}
+}
