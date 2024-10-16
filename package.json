@@ -1,19 +1,25 @@
 {
   "name": "nicovideo-api-v2",
-  "version": "1.0.0",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "version": "0.0.0-alpha.1",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/src/index.d.ts",
   "type": "module",
   "exports": {
-    ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
+    "import": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "require": {
+      "types": "./dist/src/index.d.cts",
+      "require": "./dist/index.cjs"
     }
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "build": "tsup src/index.ts --format cjs,esm --experimental-dts --clean",
     "watch": "npm run build -- --watch src",
     "prepublishOnly": "npm run build"
   },
@@ -22,10 +28,9 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "tsup": "^8.3.0",
-    "typescript": "5.6.3"
-  },
-  "dependencies": {
-    "@types/node": "^22.7.5"
+    "@microsoft/api-extractor": "7.47.10",
+    "tsup": "8.3.0",
+    "typescript": "5.4.2",
+    "@types/node": "22.7.5"
   }
 }

@@ -1,9 +1,10 @@
 import { convertFieldsToArray } from './lib/query';
+import { ResponseData, SearchParams } from './types/search';
 
 const baseURL = 'https://snapshot.search.nicovideo.jp/api/v2/snapshot/video/contents/search';
 
 async function searchVideos(searchParams: SearchParams): Promise<ResponseData> {
-  const response = await fetch(baseURL + '?' + new URLSearchParams(convertFieldsToArray(searchParams)));
+  const response = await fetch(baseURL + '?' + convertFieldsToArray(searchParams));
 
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);

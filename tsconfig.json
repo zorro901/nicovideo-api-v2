@@ -8,6 +8,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "target": "ESNext",
+    "module": "preserve",
     "moduleResolution": "Bundler",
     "baseUrl": ".",
     "rootDir": "./src",
@@ -17,6 +19,8 @@
     "src"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    "src/test",
+    ".tsup"
   ]
 }
