@@ -1,45 +1,23 @@
-interface Video {
-  contentId: string;
-  title: string;
-  viewCounter: number;
-}
-
-interface NicoVideoAPI {
-  searchVideos: (query: string, minViewCount?: number, limit?: number) => Promise<Video[]>;
-}
+import { convertFieldsToArray } from './lib/query';
 
 const baseURL = 'https://snapshot.search.nicovideo.jp/api/v2/snapshot/video/contents/search';
 
-async function searchVideos(query: string, minViewCount: number = 10000, limit: number = 3): Promise<Video[]> {
-  try {
-    const response = await fetch(baseURL + '?' + new URLSearchParams({
-      q: query,
-      targets: 'title',
-      fields: 'contentId,title,viewCounter',
-      'filters[viewCounter][gte]': minViewCount.toString(),
-      _sort: '-viewCounter',
-      _offset: "0",
-      _limit: limit.toString(),
-      _context: 'apiguide'
-    }));
+async function searchVideos(searchParams: SearchParams): Promise<ResponseData> {
+  const response = await fetch(baseURL + '?' + new URLSearchParams(convertFieldsToArray(searchParams)));
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching data from NicoVideo API:', error);
-    throw error;
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
+
+  const result = await response.json() as ResponseData;
+  process.env.DUBUG && console.info(result.data);
+  return result
 }
 
-// createClient関数
-function createClient(): NicoVideoAPI {
+function createClient(): { searchVideos: (searchParams: SearchParams) => Promise<ResponseData> } {
   return {
-    searchVideos
+    searchVideos,
   };
 }
 
-// モジュールエクスポート
 export { createClient };
