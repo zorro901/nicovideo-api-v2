@@ -20,16 +20,44 @@ type NicoVideoMetadata = {
   genreKeyword: string; // ジャンル完全一致
 }
 
-type SearchField = Omit<NicoVideoMetadata, 'tagsExact' | 'genre.keyword'>
+export type SearchField = Omit<NicoVideoMetadata, 'tagsExact' | 'genreKeyword'>
 type SortingField = Pick<NicoVideoMetadata, 'viewCounter' | 'mylistCounter' | 'likeCounter' | 'lengthSeconds' | 'startTime' | 'commentCounter' | 'lastCommentTime'>
-type FilteringField = Omit<NicoVideoMetadata, 'title' | 'description' | 'userId' | 'channelId' | 'thumbnailUrl' | 'lastResBody'>
-type TargetsField = 'categoryTags' | 'title' | 'description' | 'tags' | 'genre' | 'lastResBody' | 'tagsExact'
+export type FilteringField = Omit<NicoVideoMetadata, 'title' | 'description' | 'userId' | 'channelId' | 'thumbnailUrl' | 'lastResBody'>
+export type TargetsField = 'categoryTags' | 'title' | 'description' | 'tags' | 'genre' | 'lastResBody' | 'tagsExact'
 
-type SearchParams = {
+// 数値範囲指定の型
+export type NumberRange = {
+  min?: number;
+  max?: number;
+};
+
+export type TimeRange = {
+  from?: string; // ISO8601形式
+  to?: string; // ISO8601形式
+};
+
+// フィルター用の型
+export type FilterField = {
+  viewCounter?: NumberRange; // 再生数の範囲
+  mylistCounter?: NumberRange; // マイリスト数の範囲
+  likeCounter?: NumberRange; // いいね数の範囲
+  lengthSeconds?: NumberRange; // 再生時間の範囲
+  commentCounter?: NumberRange; // コメント数の範囲
+  startTime?: TimeRange; // 投稿時間の範囲 (ISO8601形式)
+  genre?: string; // ジャンル
+  tagsExact?: string; // タグ完全一致
+  genreKeyword?: string;
+  'tags'?: string;
+  'categoryTags'?: string;
+  'cmsid'?: string; // 動画ID "sm12345"
+  'contentId'?: string;
+};
+
+export type SearchParams = {
   q: string; // 検索キーワード
   targets: Partial<Record<TargetsField, true>>; // 検索対象フィールドのオブジェクト
   fields?: Partial<Record<keyof SearchField, true>> // レスポンスに含めるフィールド (任意)
-  filters?: string; // 検索結果をフィルタ (任意)
+  filters?:FilterField,
   jsonFilter?: JsonFilter; // 複雑なフィルタ条件 (任意)
   sort?: Partial<Record<keyof SortingField, 'asc' | 'desc'>>;
   offset?: number; // 取得オフセット (任意、デフォルト: 0)
@@ -47,13 +75,10 @@ type DataItem = {
   [key: string]: string;
 }
 
-type ResponseData = {
+export type ResponseData = {
   meta: Meta;
   data: DataItem[];
 }
-
-// 共通の型
-type FilterType = 'equal' | 'range' | 'or' | 'and' | 'not';
 
 // equalフィルター
 interface EqualFilter {
