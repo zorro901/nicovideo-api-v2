@@ -12,6 +12,12 @@ export function convertFieldsToArray(options: SearchParams): string {
     ...options,
     _limit: options.limit?.toString(), // number to string
     _offset: options.offset?.toString(), // number to string
+    _context: options.context ?? 'apiguide',
+    _sort: options.sort ?? {viewCounter:'asc'},
+    limit:undefined,
+    offset:undefined,
+    context:undefined,
+    sort:undefined,
   };
 
   if (options.targets) {
@@ -38,8 +44,12 @@ export function convertFieldsToArray(options: SearchParams): string {
       .map(([key, value]) => [key, String(value)]),
   );
 
-  const queryParams = convertFiltersToUrlString(options.filters!);
-  return new URLSearchParams(searchParams).toString() + '&' + queryParams
+  if (options.filters) {
+    const queryParams = convertFiltersToUrlString(options.filters);
+    return new URLSearchParams(searchParams).toString() + '&' + queryParams
+  }
+
+  return new URLSearchParams(searchParams).toString()
 }
 function formatDate(value: string | Date): string {
   const date = new Date(value);
