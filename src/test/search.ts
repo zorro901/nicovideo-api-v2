@@ -3,17 +3,30 @@ import { createClient } from '../index'
 const nicovideo = createClient()
 try {
 	const result = await nicovideo.searchVideos({
-		q: '初音ミク',
+		q: 'ドーナツホール',
 		targets: {
 			title: true,
 		},
 		limit: 3,
-		context: 'apiguide',
-		sort: { lengthSeconds: 'desc' },
+		sort: { likeCounter: 'desc' },
 		fields: {
-			title: true,
-			lengthSeconds: true,
-			mylistCounter: true,
+			contentId: true, // コンテンツID
+			title: true, // タイトル
+			description: true, // 説明文
+			userId: true, // ユーザー投稿動画の場合、投稿者のユーザーID
+			channelId: true, // チャンネル動画の場合、チャンネルID
+			viewCounter: true, // 再生数
+			mylistCounter: true, // マイリスト数またはのお気に入り数
+			likeCounter: true, // いいね！数
+			lengthSeconds: true, // 再生時間(秒)
+			thumbnailUrl: true, // サムネイルのURL
+			startTime: true, // コンテンツの投稿時間 (ISO8601形式)
+			lastResBody: true, // 最新のコメント
+			commentCounter: true, // コメント数
+			lastCommentTime: true, // 最終コメント時間 (ISO8601形式)
+			categoryTags: true, // カテゴリタグ
+			tags: true, // タグ(空白区切り)
+			genre: true, // ジャンル
 		},
 		jsonFilter: {
 			type: 'and',
@@ -21,55 +34,34 @@ try {
 				{
 					type: 'equal',
 					field: 'tags',
-					value: 'ボカコレ2021秋MMD_3DCG',
+					value: 'VOCALOID殿堂入り',
 				},
 				{
 					type: 'equal',
 					field: 'tags',
-					value: 'REM式初音ミク',
+					value: 'ハチ',
+				},
+				{
+					type: 'range',
+					field: 'startTime',
+					from: '2020-07-07T00:00:00+09:00',
+					to: '2024-10-01T00:00:00+09:00',
+					include_lower: true,
 				},
 			],
 		},
-		// jsonFilter: {
-		//   type: 'or',
-		//   filters: [
-		//     {
-		//       'type': 'range',
-		//       'field': 'startTime',
-		//       'from': '2017-07-07T00:00:00+09:00',
-		//       'to': '2017-07-08T00:00:00+09:00',
-		//       'include_lower': true,
-		//     },
-		//     {
-		//       'type': 'range',
-		//       'field': 'startTime',
-		//       'from': '2016-07-07T00:00:00+09:00',
-		//       'to': '2016-07-08T00:00:00+09:00',
-		//       'include_lower': true,
-		//     },
-		//   ],
-		// },
 		filters: {
-			// viewCounter: {
-			//   min: 100,  // gte の代わりに min
-			//   max: 1000   // lte の代わりに max
-			// },
-			// tagsExact:"ゲーム",
-			// genreKeyword:"ゲーム",
-			// 'genre.keyword':"ゲーム",
-			// 'genre':"ゲーム",
-			// tags:'ボカコレ2021秋MMD_3DCG',
-			// tags:'REM式初音ミク',
-			mylistCounter: {
-				min: 113,
-				max: 113,
+			likeCounter: {
+				min: 24700,
+				max: 25000,
 			},
 			startTime: {
 				from: '2021', // 2022年のデータのみを抽出する
-				to: '2023',
+				to: '2025',
 			},
 		},
 	})
+	console.info(result)
 } catch (error) {
 	console.error('Error fetching data from NicoVideo API:', error)
 }

@@ -28,10 +28,10 @@
 		"lint:fix": "biome check --write --unsafe --error-on-warnings --no-errors-on-unmatched",
 		"typecheck": "tsc --noEmit"
 	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"description": "",
+	"keywords": ["nicovideo"],
+	"author": "shin <zorro901@outlook.jp>",
+	"license": "MIT",
+	"description": "A simple library to interact with Nicovideo Snapshot Search API v2",
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.3",
 		"@types/node": "22.7.5",
