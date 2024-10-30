@@ -1,8 +1,8 @@
 import { createClient } from '../index'
 
-const nicovideo = createClient()
+const client = createClient()
 try {
-	const result = await nicovideo.searchVideos({
+	const result = await client.searchVideos({
 		q: 'ドーナツホール',
 		targets: {
 			title: true,
@@ -53,7 +53,7 @@ try {
 		filters: {
 			likeCounter: {
 				min: 24700,
-				max: 25000,
+				max: 99999,
 			},
 			startTime: {
 				from: '2021', // 2022年のデータのみを抽出する

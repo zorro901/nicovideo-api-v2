@@ -4,26 +4,25 @@ import type { ResponseData, SearchParams } from './types/search'
 const baseURL =
 	'https://snapshot.search.nicovideo.jp/api/v2/snapshot/video/contents/search'
 
-async function searchVideos(searchParams: SearchParams): Promise<ResponseData> {
-	const response = await fetch(
-		`${baseURL}?${convertFieldsToArray(searchParams)}`,
-	)
+async function searchVideos(
+	proxyUrl: string,
+	searchParams: SearchParams,
+): Promise<ResponseData> {
+	const proxyUrlEndsWithSlash = proxyUrl.endsWith('/')
+		? proxyUrl
+		: `${proxyUrl}/`
+	const url = `${proxyUrl === '' ? '' : proxyUrlEndsWithSlash}${baseURL}?${convertFieldsToArray(searchParams)}`
 
-	if (!response.ok) {
-		throw new Error(`HTTP error! status: ${response.status}`)
-	}
-
-	const result = (await response.json()) as ResponseData
-	process.env.DUBUG && console.info(result.data)
-	return result
+	const response = await fetch(url)
+	return await response.json()
 }
 
-function createClient(): {
+function createClient({ proxyUrl }: { proxyUrl?: string } = {}): {
 	searchVideos: (searchParams: SearchParams) => Promise<ResponseData>
 } {
 	return {
-		searchVideos,
+		searchVideos: (searchParams: SearchParams): Promise<ResponseData> =>
+			searchVideos(proxyUrl || '', searchParams),
 	}
 }
-
 export { createClient }
