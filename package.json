@@ -1,6 +1,10 @@
 {
 	"name": "nicovideo-api-v2",
 	"version": "0.0.0-alpha.1",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/zorro901/nicovideo-api-v2.git"
+	},
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -33,9 +37,9 @@
 	"license": "MIT",
 	"description": "A simple library to interact with Nicovideo Snapshot Search API v2",
 	"devDependencies": {
-		"@biomejs/biome": "^1.9.3",
+		"@biomejs/biome": "1.9.3",
 		"@types/node": "22.7.5",
-		"lefthook": "^1.7.18",
+		"lefthook": "1.7.18",
 		"tsup": "8.3.0",
 		"typescript": "5.4.2"
 	}
