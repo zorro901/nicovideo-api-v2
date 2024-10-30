@@ -22,9 +22,12 @@ npm install nicovideo-api-v2
 ```typescript
 import { createClient } from 'nicovideo-api-v2';
 
-const nicovideo = createClient();
+// ブラウザで使う場合はCORSサーバーを設定してください
+const client = createClient({
+  proxyUrl: '<YOUR CORS PROXY URL>',
+});
 
-const result = await nicovideo.searchVideos({
+const result = await client.searchVideos({
   q: 'ドーナツホール',
   targets: { title: true },
   limit: 3,
@@ -45,7 +48,7 @@ const result = await nicovideo.searchVideos({
     ],
   },
   filters: {
-    likeCounter: { min: 24700, max: 25000 },
+    likeCounter: { min: 24700, max: 99999 },
     startTime: { from: '2021', to: '2025' },
   },
 });
@@ -57,7 +60,7 @@ const result = await nicovideo.searchVideos({
 ```javascript
 const { createClient } = require('nicovideo-api-v2');
 
-const nicovideo = createClient();
+const client = createClient();
 
 // 同様の検索関数を使用
 ```
@@ -68,11 +71,17 @@ const nicovideo = createClient();
 
 この関数はニコニコ動画APIクライアントを生成します。生成されたクライアントを使用して動画を検索できます。
 
+#### proxyUrl
+ブラウザで使用する場合のCORS回避を行うためのプロパティです。
+
 ### `searchVideos(params)`
 
 動画を検索します。
 
 - `params` (object): 検索条件を含むオブジェクト。このオブジェクトには`q`(検索クエリ), `targets`, `fields`, `sort`, `limit`, `jsonFilter`, `filters`などが含まれます。
+
+- パラメーターの詳細はこちら
+  - src/docs/api-docs.md
 
 ## 貢献
 
@@ -81,6 +90,3 @@ const nicovideo = createClient();
 ## ライセンス
 
 このプロジェクトはMITライセンスのもとで公開されています。
-```
-
-このテンプレートには、コードの使用例やライブラリの主要な特徴が記載されています。特に使い方のセクションで、提供されたコードスニペットを説明しています。プロジェクトの仕様に合わせて、必要な情報を追加、削除、または変更してください。
