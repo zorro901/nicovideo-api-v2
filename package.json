@@ -1,6 +1,10 @@
 {
 	"name": "nicovideo-api-v2",
-	"version": "0.0.0-alpha.1",
+	"version": "0.0.0-alpha.3",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/zorro901/nicovideo-api-v2.git"
+	},
 	"main": "./dist/index.cjs",
 	"module": "./dist/index.js",
 	"types": "./dist/index.d.ts",
@@ -26,7 +30,8 @@
 		"format:fix": "biome format --write",
 		"lint": "biome lint",
 		"lint:fix": "biome check --write --unsafe --error-on-warnings --no-errors-on-unmatched",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"postinstall": "lefthook install"
 	},
 	"keywords": ["nicovideo"],
 	"author": "shin <zorro901@outlook.jp>",
