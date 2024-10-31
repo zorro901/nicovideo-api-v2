@@ -1,6 +1,6 @@
 {
 	"name": "nicovideo-api-v2",
-	"version": "0.0.0-alpha.3",
+	"version": "0.0.0-alpha.4",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/zorro901/nicovideo-api-v2.git"
