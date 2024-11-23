@@ -37,10 +37,10 @@
 	"license": "MIT",
 	"description": "A simple library to interact with Nicovideo Snapshot Search API v2",
 	"devDependencies": {
-		"@biomejs/biome": "1.9.3",
-		"@types/node": "22.7.5",
-		"lefthook": "1.7.18",
-		"tsup": "8.3.0",
-		"typescript": "5.4.2"
+		"@biomejs/biome": "1.9.4",
+		"@types/node": "22.9.3",
+		"lefthook": "1.8.4",
+		"tsup": "8.3.5",
+		"typescript": "5.7.2"
 	}
 }

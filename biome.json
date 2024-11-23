@@ -80,7 +80,8 @@
 				"useImportRestrictions": "off",
 				"noSecrets": "off",
 				"noCommonJs": "off",
-				"noProcessEnv": "off"
+				"noProcessEnv": "off",
+				"useExplicitType": "off"
 			}
 		}
 	},
