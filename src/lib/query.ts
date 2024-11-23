@@ -5,7 +5,7 @@ import type {
 	SearchParams,
 	TargetsField,
 	TimeRange,
-} from '../types/search'
+} from '@/types/search'
 
 export function convertFieldsToArray(options: SearchParams): string {
 	const newOptions: Record<string, unknown> = {
