@@ -1,4 +1,5 @@
 import { fetchComments } from '@/lib/get-comments'
+import { withProxyUrl } from '@/lib/proxy'
 import { convertFieldsToArray } from '@/lib/query'
 import type { ThreadResponse } from '@/types/get-comments'
 import type { ResponseData, SearchParams } from '@/types/search'
@@ -10,11 +11,10 @@ async function searchVideos(
 	proxyUrl: string,
 	searchParams: SearchParams,
 ): Promise<ResponseData> {
-	const proxyUrlEndsWithSlash = proxyUrl.endsWith('/')
-		? proxyUrl
-		: `${proxyUrl}/`
-	const url = `${proxyUrl === '' ? '' : proxyUrlEndsWithSlash}${baseURL}?${convertFieldsToArray(searchParams)}`
-
+	const url = withProxyUrl({
+		url: `${baseURL}?${convertFieldsToArray(searchParams)}`,
+		proxyUrl,
+	})
 	const response = await fetch(url)
 	return await response.json()
 }
@@ -25,7 +25,7 @@ function createClient({ proxyUrl }: { proxyUrl?: string } = {}): {
 } {
 	return {
 		searchVideos: (searchParams) => searchVideos(proxyUrl || '', searchParams),
-		getComments: async (id) => await fetchComments(id),
+		getComments: async (id) => await fetchComments(proxyUrl || '', id),
 	}
 }
 export { createClient }
