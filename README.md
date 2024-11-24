@@ -1,11 +1,13 @@
 # ニコニコ動画スナップショット検索API v2
 
 このライブラリは、ニコニコ動画のスナップショット検索API v2を簡単に利用できるように設計されています。  
-CJS、EJSに対応しており、TypeScriptでも利用可能です。外部依存関係はありません。
+ESM、CJSに対応しており、TypeScriptでも利用可能です。外部依存関係はありません。
 
 ## 特徴
 
-- CJS, EJS, TypeScript 対応
+- キーワードから動画情報を検索
+- 動画IDからコメント取得
+- ESM、CJS、TypeScript 対応
 - 外部依存関係なし
 - 高度な検索機能のサポート
 
@@ -52,7 +54,6 @@ const result = await client.searchVideos({
     startTime: { from: '2021', to: '2025' },
   },
 });
-
 ```
 
 ### JavaScript (CJS)
@@ -63,6 +64,85 @@ const { createClient } = require('nicovideo-api-v2');
 const client = createClient();
 
 // 同様の検索関数を使用
+```
+
+
+### レスポンス例
+```json5
+// searchVideos
+{
+  meta: {
+    status: 200,
+    id: '061ab1eb-930a-4b75-a018-abf3ebc37257',
+    totalCount: 1
+  },
+  data: [
+    {
+      categoryTags: '音楽',
+      channelId: null,
+      commentCounter: 14651,
+      contentId: 'sm44158937',
+      description: 'どうもハチです。<br>久しぶりに作りました。少年漫画っぽいのを目指しました。<br><br>HP →　http://reissuerecords.net/<br>x　→　https://twitter.com/hachi_08<br>マイリスト　→　mylist/12682175',
+      genre: '音楽・サウンド',
+      lastCommentTime: '2024-11-23T01:24:10+09:00',
+      lastResBody: '🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩 🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩 🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩 🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩🍩 🍩🍩🍩🍩 8888888888888...',
+      lengthSeconds: 228,
+      likeCounter: 26011,
+      mylistCounter: 4817,
+      startTime: '2024-09-30T10:00:00+09:00',
+      tags: '王の帰還 ドーナツホール VOCALOID-PV ハチ VOCALOID ドーナツホール2024 GUMIオリジナル曲 VOCALOID殿堂入り GUMI 伝説のgumiマスター Production_I.G',
+      thumbnailUrl: 'https://nicovideo.cdn.nimg.jp/thumbnails/44158937/44158937.69156853',
+      title: 'ハチ MV 「ドーナツホール 2024」',
+      userId: 380847,
+      viewCounter: 814550
+    }
+  ]
+}
+```
+```json5
+// getComments
+{
+  meta: { status: 200 },
+  data: {
+    globalComments: [ { id: '1727655904', count: 14694 } ],
+    threads: [
+      {
+        id: '1727655904',
+        fork: 'owner',
+        commentCount: 0,
+        comments: []
+      },
+      {
+        id: '1727655904',
+        fork: 'main',
+        commentCount: 13170,
+        comments: [
+          {
+            id: '1302078544327573504',
+            no: 1500,
+            vposMs: 12560,
+            body: 'かっこいい',
+            commands: [ '184' ],
+            userId: 'nvc:QUpBfc_1o_6cEIzdSMWwagUqssQ',
+            isPremium: false,
+            score: 0,
+            postedAt: '2024-11-02T10:15:16+09:00',
+            nicoruCount: 0,
+            nicoruId: null,
+            source: 'trunk',
+            isMyPost: false
+          },
+        ]
+      },
+      {
+        id: '1727655904',
+        fork: 'easy',
+        commentCount: 1524,
+        comments: []
+      }
+    ]
+  }
+}
 ```
 
 ## API
