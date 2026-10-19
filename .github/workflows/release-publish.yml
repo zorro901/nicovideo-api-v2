@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: Check out the code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 'lts/*'
           registry-url: 'https://registry.npmjs.org'
@@ -38,10 +38,9 @@ jobs:
       - name: Build the project
         run: npm run build
 
-      - name: Publish to NPM
-        run: npm publish --provenance --access public --tag latest
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # 公開には npmjs.com の Staged Packages タブで 2FA 承認が必要
+      - name: Stage publish to NPM
+        run: npm stage publish --access public --tag latest
 
       - name: Commit and push version changes
         run: |
