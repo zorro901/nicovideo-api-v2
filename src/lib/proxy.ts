@@ -1,7 +1,10 @@
 export function withProxyUrl({
 	proxyUrl,
 	url,
-}: { proxyUrl: string; url: string }) {
+}: {
+	proxyUrl: string
+	url: string
+}) {
 	const proxyUrlEndsWithSlash = proxyUrl.endsWith('/')
 		? proxyUrl
 		: `${proxyUrl}/`

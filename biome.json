@@ -7,11 +7,9 @@
 	},
 	"files": {
 		"ignoreUnknown": true,
-		"ignore": ["dist"]
+		"includes": ["**", "!**/dist"]
 	},
-	"organizeImports": {
-		"enabled": true
-	},
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"formatter": {
 		"enabled": true,
 		"formatWithErrors": false
@@ -19,15 +17,16 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
+			"preset": "recommended",
 			"security": {
-				"recommended": true
+				"preset": "recommended",
+				"noSecrets": "off"
 			},
 			"a11y": {
-				"recommended": true
+				"preset": "recommended"
 			},
 			"complexity": {
-				"recommended": true,
+				"preset": "recommended",
 				"useSimplifiedLogicExpression": "error",
 				"noVoid": "error",
 				"noExcessiveCognitiveComplexity": {
@@ -38,50 +37,46 @@
 				}
 			},
 			"correctness": {
-				"recommended": true,
+				"preset": "recommended",
 				"noUndeclaredVariables": "off",
 				"useHookAtTopLevel": "error",
-				"noNewSymbol": "error",
-				"noUnusedImports": "error"
+				"noUnusedImports": "error",
+				"noInvalidBuiltinInstantiation": "error",
+				"noSwitchDeclarations": "error"
 			},
 			"style": {
-				"recommended": true,
+				"preset": "recommended",
 				"noNegationElse": "error",
 				"noRestrictedGlobals": {
 					"level": "error",
 					"options": {
-						"deniedGlobals": ["$"]
+						"deniedGlobals": { "$": "Do not use the global $." }
 					}
 				},
 				"useFragmentSyntax": "error",
 				"useNamingConvention": "off",
-				"useShorthandArrayType": "error",
 				"useShorthandAssign": "error",
 				"noNamespace": "error",
 				"noParameterProperties": "error",
 				"noShoutyConstants": "error",
 				"useBlockStatements": "error",
 				"useCollapsedElseIf": "error",
-				"useSingleCaseStatement": "error",
-				"noNamespaceImport": "off"
+				"useConsistentArrayType": {
+					"level": "error",
+					"options": { "syntax": "shorthand" }
+				},
+				"noCommonJs": "off",
+				"noProcessEnv": "off"
 			},
 			"suspicious": {
-				"recommended": true,
-				"noConsoleLog": "error",
+				"preset": "recommended",
 				"noApproximativeNumericConstant": "error",
 				"noMisrefactoredShorthandAssign": "error",
 				"noConsole": "off"
 			},
 			"performance": {
-				"recommended": true
-			},
-			"nursery": {
-				"all": true,
-				"useImportRestrictions": "off",
-				"noSecrets": "off",
-				"noCommonJs": "off",
-				"noProcessEnv": "off",
-				"useExplicitType": "off"
+				"preset": "recommended",
+				"noNamespaceImport": "off"
 			}
 		}
 	},
